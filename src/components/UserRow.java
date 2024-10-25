@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.User;
 
-public class UserRow extends JPanel
+public class UserRow extends CustomPanel
 {
 	private User user;
 	
@@ -24,27 +24,28 @@ public class UserRow extends JPanel
 	
 	public UserRow(User user)
 	{
+		super(20, 0.8f);
 		this.user = user;
         setLayout(new BorderLayout());
         setBackground(new Color(250, 250, 250));
-        setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 50));
 
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BorderLayout());
-        playerPanel.setBackground(new Color(250, 250, 250));
+        playerPanel.setOpaque(false);
         playerPanel.setBorder(new EmptyBorder(0, 10, 0, 20));
 
         JLabel playerRankLabel = new JLabel(String.format("#%03d", user.getRank()));
-        playerRankLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        playerRankLabel.setFont(new Font("Arial", Font.BOLD, 22));
         playerRankLabel.setForeground(new Color(0, 140, 255));
         playerPanel.add(playerRankLabel, BorderLayout.WEST);
         
         JLabel playerNameLabel = new JLabel(user.getUsername());
-        playerNameLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 18));
-        Color statusColor = new Color(5, 166, 21);
+        playerNameLabel.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 22));
+        Color statusColor = new Color(50, 160, 0);
         if(!user.getIsOnline())
         {
-        	statusColor = new Color(190, 190, 190);
+        	statusColor = new Color(140, 140, 140);
         }
         playerNameLabel.setForeground(statusColor);
         playerNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -52,18 +53,20 @@ public class UserRow extends JPanel
         playerPanel.add(playerNameLabel, BorderLayout.CENTER);
         
         JLabel playerStarsLabel = new JLabel("" + user.getStars());
-        playerStarsLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        playerStarsLabel.setFont(new Font("Arial", Font.BOLD, 22));
         playerStarsLabel.setHorizontalAlignment(JLabel.RIGHT);
-        playerStarsLabel.setForeground(new Color(255, 90, 255));
+        playerStarsLabel.setForeground(new Color(200, 0, 200));
         playerStarsLabel.setPreferredSize(new Dimension(50, 50));
         playerPanel.add(playerStarsLabel, BorderLayout.EAST);
 
         JPanel availableButtonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        availableButtonPanel.setBackground(new Color(250, 250, 250));
+        availableButtonPanel.setOpaque(false);
+        availableButtonPanel.setBorder(new EmptyBorder(5, 0, 0, 10));
         
         inviteButton = new JButton("Invite");
-        inviteButton.setBackground(new Color(208, 80, 0));
+        inviteButton.setBackground(new Color(35, 124, 93));
         inviteButton.setForeground(Color.white);
+        inviteButton.setFont(new Font("Arial", Font.PLAIN, 16));
         inviteButton.addActionListener(new InviteButtonClick());
         if(!user.getIsOnline())
         {
@@ -71,8 +74,9 @@ public class UserRow extends JPanel
         }
 
         historyButton = new JButton("History");
-        historyButton.setBackground(new Color(194, 24, 91));
+        historyButton.setBackground(new Color(190, 70, 0));
         historyButton.setForeground(Color.white);
+        historyButton.setFont(new Font("Arial", Font.PLAIN, 16));
         historyButton.addActionListener(new HistoryButtonClick());
 
         availableButtonPanel.add(inviteButton);

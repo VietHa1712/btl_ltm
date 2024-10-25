@@ -23,7 +23,7 @@ public class HomeRun {
 				ArrayList<User> userList = new ArrayList<User>();
 				ArrayList<Invitation> invitationList = new ArrayList<Invitation>();
 				
-				for(int i = 0; i < 10; i++)
+				for(int i = 0; i < 5; i++)
 				{
 					User u = new User(i, "player" + i, r.nextInt(1000), r.nextBoolean());
 					userList.add(u);

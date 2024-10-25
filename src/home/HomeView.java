@@ -1,11 +1,11 @@
 package home;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
 import components.BackgroundPanel;
+import components.CustomPanel;
+import components.CustomScrollBarUI;
 import components.InvitationRow;
 import components.UserRow;
 import models.Invitation;
@@ -38,7 +38,7 @@ public class HomeView extends JFrame {
     private JPanel invitationListContent;
     
     public HomeView() {
-        setTitle("Game - Card Matching");
+        setTitle("Home");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1024, 768);
 	    setMinimumSize(new Dimension(1000, 600));
@@ -53,52 +53,59 @@ public class HomeView extends JFrame {
         }
         
         // Main Panel
-        JPanel mainPanel = new JPanel();
+        JPanel mainPanel = new BackgroundPanel("./resources/back1.jpg");
         mainPanel.setLayout(new BorderLayout());
-        mainPanel.setBackground(new Color(200, 200, 200));
 
         // Top Menu Panel
         JPanel topMenu = new JPanel();
         topMenu.setLayout(new BorderLayout(10, 10));
-        topMenu.setBackground(new Color(5, 166, 21));
+        topMenu.setBackground(new Color(35, 124, 93));
+        topMenu.setPreferredSize(new Dimension(50, 50));
+        topMenu.setBorder(new EmptyBorder(5, 10, 5, 0));
 
         JPanel playerInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        playerInfoPanel.setBackground(new Color(5, 166, 21));
+        playerInfoPanel.setOpaque(false);
         playerInfo = new JLabel("Player: nguyenvietha    Rank: #003    Stars: 100");
-        playerInfo.setBorder(new EmptyBorder(5, 10, 0, 0));
+        playerInfo.setBorder(new EmptyBorder(2, 0, 0, 0));
         playerInfo.setForeground(Color.WHITE);
-        playerInfo.setFont(new Font("Arial", Font.BOLD, 16));
+        playerInfo.setFont(new Font("Arial", Font.BOLD, 22));
         playerInfoPanel.add(playerInfo, BorderLayout.CENTER);
 
         JPanel historyLogoutPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        historyLogoutPanel.setBackground(new Color(5, 166, 21));
+        historyLogoutPanel.setOpaque(false);
+        //historyLogoutPanel.setBorder(new EmptyBorder(5, 0, 0, 0));
         historyButton = new JButton("History");
         logOutButton = new JButton("Log out");
-        logOutButton.setBackground(new Color(2, 69, 0));
+        logOutButton.setBackground(new Color(130, 0, 0));
         logOutButton.setForeground(Color.WHITE);
-        historyButton.setBackground(new Color(194, 24, 91));
+        logOutButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        historyButton.setBackground(new Color(190, 70, 0));
         historyButton.setForeground(Color.WHITE);
+        historyButton.setFont(new Font("Arial", Font.PLAIN, 16));
         historyLogoutPanel.add(historyButton);
         historyLogoutPanel.add(logOutButton);
-
-        topMenu.add(playerInfoPanel, BorderLayout.WEST);
+        
+        BackgroundPanel userIconPanel = new BackgroundPanel("./resources/profile-user.png");
+        userIconPanel.setPreferredSize(new Dimension(45, 45));
+        userIconPanel.setOpaque(false);
+        userIconPanel.setBorder(new EmptyBorder(5, 10, 5, 5));
+        
+        topMenu.add(userIconPanel, BorderLayout.WEST);
+        topMenu.add(playerInfoPanel, BorderLayout.CENTER);
         topMenu.add(historyLogoutPanel, BorderLayout.EAST);
 
         JPanel playButtonsAndPlayerListPanel = new JPanel();
         playButtonsAndPlayerListPanel.setLayout(new BorderLayout(0, 20));
-        playButtonsAndPlayerListPanel.setBackground(new Color(209, 209, 209));
+        playButtonsAndPlayerListPanel.setOpaque(false);
         playButtonsAndPlayerListPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         
         // Play Buttons Panel
-        JPanel playButtonsPanel = new BackgroundPanel("./resources/background.png");
+        JPanel playButtonsPanel = new CustomPanel(20, 0.7f);
         playButtonsPanel.setOpaque(false);
+        playButtonsPanel.setPreferredSize(new Dimension(400, 150));
         playButtonsPanel.setLayout(new GridLayout(2, 2, 40, 20));
-        playButtonsPanel.setBackground(new Color(250, 250, 250));
+        playButtonsPanel.setBackground(new Color(74, 107, 124));
         playButtonsPanel.setBorder(new EmptyBorder(20, 40, 20, 40));
-//        Border playButtonBorder = BorderFactory.createLineBorder(
-//        		new Color(150, 150, 150), 1);
-//        playButtonsPanel.setBorder(new CompoundBorder(playButtonBorder,
-//        		new EmptyBorder(20, 40, 20, 40)));
 
         playButtonsLabel = new JLabel("Choose a play mode");
         playButtonsLabel.setBorder(new EmptyBorder(0, 5, 0, 0));
@@ -109,23 +116,23 @@ public class HomeView extends JFrame {
         
         cancelFindingButton = new JButton("Cancel");
         cancelFindingButton.setForeground(Color.white);
-        cancelFindingButton.setBackground(new Color(190, 0, 0));
-        cancelFindingButton.setFont(new Font("Arial", Font.BOLD, 20));
+        cancelFindingButton.setBackground(new Color(180, 0, 0));
+        cancelFindingButton.setFont(new Font("Arial", Font.BOLD, 28));
         cancelFindingButton.setVisible(false);
         playButtonsPanel.add(cancelFindingButton);
         
         
         findMatchButton = new JButton("Find Match");
         findMatchButton.setForeground(Color.white);
-        findMatchButton.setBackground(new Color(208, 80, 0));
-        findMatchButton.setFont(new Font("Arial", Font.BOLD, 20));
+        findMatchButton.setBackground(new Color(35, 124, 93));
+        findMatchButton.setFont(new Font("Arial", Font.BOLD, 28));
         findMatchButton.setBorder(null);
         playButtonsPanel.add(findMatchButton);
         
         practiceButton = new JButton("Practice");
         practiceButton.setForeground(Color.white);
-        practiceButton.setBackground(new Color(0, 164, 197));
-        practiceButton.setFont(new Font("Arial", Font.BOLD, 20));
+        practiceButton.setBackground(new Color(35, 124, 93));
+        practiceButton.setFont(new Font("Arial", Font.BOLD, 28));
         practiceButton.setBorder(null);
         playButtonsPanel.add(practiceButton);
         
@@ -133,19 +140,20 @@ public class HomeView extends JFrame {
         
         // Player List Panel
         
-        JPanel playerListPanel = new JPanel();
+        JPanel playerListPanel = new CustomPanel(25, 0f);
         playerListPanel.setLayout(new BorderLayout());
-        playerListPanel.setBackground(new Color(0, 150, 15));
-        Border playerListBorder = BorderFactory.createLineBorder(
-        		new Color(0, 150, 15), 3);
-        playerListPanel.setBorder(playerListBorder);
+        playerListPanel.setOpaque(false);
+        playerListPanel.setBorder(null);
+//        Border playerListBorder = BorderFactory.createLineBorder(
+//        		new Color(0, 150, 15), 3);
+//        playerListPanel.setBorder(playerListBorder);
         
-        JLabel rankingLabel = new JLabel("PLAYER LIST", SwingConstants.CENTER);
-        rankingLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        rankingLabel.setForeground(new Color(240, 240, 240));
-        rankingLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
+        JLabel playerListLabel = new JLabel("PLAYER LIST", SwingConstants.CENTER);
+        playerListLabel.setFont(new Font("Arial", Font.BOLD, 26));
+        playerListLabel.setForeground(Color.black);
+        playerListLabel.setBorder(new EmptyBorder(10, 0, 10, 0));
         
-        JPanel playerListSearchPanel = new JPanel();
+        JPanel playerListSearchPanel = new CustomPanel(20, 0.5f);
         playerListSearchPanel.setLayout(new BorderLayout());
         playerListSearchPanel.setBackground(new Color(250, 250, 250));
         playerListSearchPanel.setBorder(new EmptyBorder(10, 5, 10, 5));
@@ -154,36 +162,43 @@ public class HomeView extends JFrame {
         playerListSearchField.setFont(new Font("Arial", Font.PLAIN, 20));
         
         playerListSearchButton = new JButton("Search");
-        playerListSearchButton.setBackground(new Color(127, 0, 165));
+        playerListSearchButton.setBackground(new Color(35, 124, 93));
         playerListSearchButton.setForeground(Color.white);
+        playerListSearchButton.setFont(new Font("Arial", Font.PLAIN, 16));
         
         String[] filterItems = {"All", "Online"};
         filterComboBox = new JComboBox<String>(filterItems);
         filterComboBox.setBackground(Color.white);
+        filterComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
         playerListSearchPanel.add(filterComboBox, BorderLayout.WEST);
         playerListSearchPanel.add(playerListSearchButton, BorderLayout.EAST);
         playerListSearchPanel.add(playerListSearchField, BorderLayout.CENTER);
         
         JPanel playerListLabelAndSearchPanel = new JPanel();
+        playerListLabelAndSearchPanel.setBorder(null);
         playerListLabelAndSearchPanel.setLayout(new BorderLayout());
-        playerListLabelAndSearchPanel.setBackground(new Color(0, 150, 15));
-        playerListLabelAndSearchPanel.add(rankingLabel, BorderLayout.NORTH);
+        playerListLabelAndSearchPanel.setOpaque(false);
+        playerListLabelAndSearchPanel.add(playerListLabel, BorderLayout.NORTH);
         playerListLabelAndSearchPanel.add(playerListSearchPanel, BorderLayout.SOUTH);
         playerListPanel.add(playerListLabelAndSearchPanel, BorderLayout.NORTH);
         
-        playerListContent = new JPanel();
-        playerListContent.setBackground(new Color(235, 235, 235));
+        playerListContent = new CustomPanel(25, 0.1f);
+        playerListContent.setBorder(new EmptyBorder(10, 10, 10, 10));
         playerListContent.setLayout(new BoxLayout(playerListContent, BoxLayout.Y_AXIS));
 
         JScrollPane playerListScroll = new JScrollPane(playerListContent);
+        playerListScroll.getVerticalScrollBar().setUI(new CustomScrollBarUI(Color.LIGHT_GRAY, new Color(2, 69, 0)));
+        playerListScroll.setOpaque(false);
+        playerListScroll.getViewport().setOpaque(false);
         playerListScroll.setBorder(null);
+        playerListScroll.setViewportBorder(null);
         playerListPanel.add(playerListScroll, BorderLayout.CENTER);
 
         
         playButtonsAndPlayerListPanel.add(playerListPanel, BorderLayout.CENTER);
 
         // Invitations Panel
-        JPanel invitationsPanel = new JPanel();
+        JPanel invitationsPanel = new CustomPanel(0, 0.5f);
         invitationsPanel.setPreferredSize(new Dimension(300, 100));
         invitationsPanel.setLayout(new BorderLayout());
         invitationsPanel.setBackground(new Color(2, 69, 0));
@@ -191,11 +206,11 @@ public class HomeView extends JFrame {
         
         invitationListContent = new JPanel();
         invitationListContent.setLayout(new BoxLayout(invitationListContent, BoxLayout.Y_AXIS));
-        invitationListContent.setBackground(new Color(2, 69, 0));
+        invitationListContent.setOpaque(false);
         invitationListContent.setBorder(new EmptyBorder(0, 0, 0, 10));
         
         JLabel invitationsLabel = new JLabel("INVITATIONS");
-        invitationsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        invitationsLabel.setFont(new Font("Arial", Font.BOLD, 25));
         invitationsLabel.setForeground(Color.white);
         invitationsLabel.setHorizontalAlignment(JLabel.CENTER);
         invitationsLabel.setBorder(new EmptyBorder(15, 0, 20, 0));
@@ -203,6 +218,10 @@ public class HomeView extends JFrame {
 
         JScrollPane inviteScroll = new JScrollPane(invitationListContent);
         inviteScroll.setBorder(null);
+        inviteScroll.setOpaque(false);
+        inviteScroll.getViewport().setOpaque(false);
+        inviteScroll.setViewportBorder(null);
+        inviteScroll.getVerticalScrollBar().setUI(new CustomScrollBarUI(Color.LIGHT_GRAY, new Color(2, 69, 0)));
         invitationsPanel.add(inviteScroll, BorderLayout.CENTER);
 
         // Add everything to mainPanel
@@ -299,7 +318,7 @@ public class HomeView extends JFrame {
     {
     	UserRow userRow = new UserRow(user);
         playerListContent.add(userRow);
-        playerListContent.add(Box.createRigidArea(new Dimension(0, 3)));
+        playerListContent.add(Box.createRigidArea(new Dimension(0, 8)));
     }
     
     public void removeAllPlayerRows()

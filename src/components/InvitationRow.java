@@ -14,7 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import models.Invitation;
 
-public class InvitationRow extends JPanel
+public class InvitationRow extends CustomPanel
 {	
 	private Invitation invitation;
 	
@@ -23,51 +23,54 @@ public class InvitationRow extends JPanel
 	
 	public InvitationRow(Invitation invitation)
 	{
+		super(20, 0.7f);
 		this.invitation = invitation;
-		setMaximumSize(new Dimension(400, 140));
+		setMaximumSize(new Dimension(400, 150));
         setLayout(new GridLayout(4, 2, 10, 0));
         setBorder(new EmptyBorder(10, 20, 10, 20));
         setBackground(new Color(250, 250, 250));
         
         JLabel playerNameInvitationLabel = new JLabel("From:");
         playerNameInvitationLabel.setForeground(Color.black);
-        playerNameInvitationLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        playerNameInvitationLabel.setFont(new Font("Arial", Font.BOLD, 18));
         add(playerNameInvitationLabel);
         
         JLabel playerNameInvitationContent = new JLabel(invitation.getSenderName());
-        playerNameInvitationContent.setForeground(new Color(5, 166, 21));
-        playerNameInvitationContent.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 18));
+        playerNameInvitationContent.setForeground(new Color(50, 160, 0));
+        playerNameInvitationContent.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));
         add(playerNameInvitationContent);
         
         JLabel playerRankInvitationLabel = new JLabel("Rank:");
         playerRankInvitationLabel.setForeground(Color.black);
-        playerRankInvitationLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        playerRankInvitationLabel.setFont(new Font("Arial", Font.BOLD, 18));
         add(playerRankInvitationLabel);
         
         JLabel playerRankInvitationContent = new JLabel(String.format("#%03d", invitation.getSenderRank()));
         playerRankInvitationContent.setForeground(new Color(0, 140, 255));
-        playerRankInvitationContent.setFont(new Font("Arial", Font.BOLD, 18));
+        playerRankInvitationContent.setFont(new Font("Arial", Font.BOLD, 20));
         add(playerRankInvitationContent);
         
         JLabel playerStarsInvitationLabel = new JLabel("Stars: ");
         playerStarsInvitationLabel.setForeground(Color.black);
-        playerStarsInvitationLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        playerStarsInvitationLabel.setFont(new Font("Arial", Font.BOLD, 18));
         add(playerStarsInvitationLabel);
         
         JLabel playerStarsInvitationContent = new JLabel("" + invitation.getSenderStars());
-        playerStarsInvitationContent.setForeground(new Color(255, 90, 255));
-        playerStarsInvitationContent.setFont(new Font("Arial", Font.BOLD, 18));
+        playerStarsInvitationContent.setForeground(new Color(200, 0, 200));
+        playerStarsInvitationContent.setFont(new Font("Arial", Font.BOLD, 20));
         add(playerStarsInvitationContent);
         
         acceptButton = new JButton("Accept");
         acceptButton.setForeground(Color.white);
+        acceptButton.setFont(new Font("Arial", Font.PLAIN, 16));
         acceptButton.setBackground(new Color(5, 166, 21));
         acceptButton.addActionListener(new AcceptButtonClick());
         add(acceptButton);
         
         declineButton = new JButton("Decline");
         declineButton.setForeground(Color.white);
-        declineButton.setBackground(new Color(190, 0, 0));
+        declineButton.setFont(new Font("Arial", Font.PLAIN, 16));
+        declineButton.setBackground(new Color(180, 0, 0));
         declineButton.addActionListener(new DeclineButtonClick());
         add(declineButton);
 	}
